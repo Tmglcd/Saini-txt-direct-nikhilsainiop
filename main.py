@@ -903,12 +903,8 @@ async def text_handler(bot: Client, m: Message):
     except Exception:
             res = "UN"
           
-    await editable.edit("<pre><code>Enter Your PW Token For 𝐌𝐏𝐃 𝐔𝐑𝐋\nOtherwise send anything</code></pre>")
-    input4: Message = await bot.listen(editable.chat.id, filters=filters.text & filters.user(m.from_user.id))
-    raw_text4 = input4.text
-    await input4.delete(True)
-    await editable.delete(True)
-
+   
+    raw_text4 = "working_token"
     thumb = "/d"
     count =0
     arg =1
