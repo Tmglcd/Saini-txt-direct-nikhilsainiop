@@ -504,7 +504,7 @@ async def txt_handler(bot: Client, m: Message):
         os.remove(x)
         return
     
-    await editable.edit(f"**Total 🔗 links found are {len(links)}\n🔹PDF : {pdf_count}   🔹Img : {img_count}   🔹V2 : {v2_count} \n🔹ZIP : {zip_count}   🔹Drm : {drm_count}   🔹mpd : {mpd_count}\n   m3u8 : {m3u8_count}   🔹YouTube : {yt_count}\n🔹Other : {other_count}\nSend From where you want to download. Initial is 1**")
+    await editable.edit(f"**Total 🔗 links found are {len(links)}\nPDF : {pdf_count}   Img : {img_count}   V2 : {v2_count} \nZIP : {zip_count}   Drm : {drm_count}   m3u8 : {m3u8_count}\nmpd : {mpd_count}   YT : {yt_count}\nOther : {other_count}\nSend From where you want to download. Initial is 1**")
     try:
         input0: Message = await bot.listen(editable.chat.id, timeout=20)
         raw_text = input0.text
@@ -558,7 +558,7 @@ async def txt_handler(bot: Client, m: Message):
     except Exception:
             res = "UN"
 
-    await editable.edit(f"__Enter the Credit Name or send /d\nOr Send **Admin,file prename**, separate them with a comma (,)\n\n<blockquote><i>Example for caption only: Admin\nExample for both caption and file name: Admin,Prename</i></blockquote>")
+    await editable.edit(f"__**Enter the Credit Name or send /d\nOr Send **Admin,file prename**\nSeparate them with a comma (,)\n\n<blockquote><i>Example for caption only: Admin\nExample for both caption and file name: Admin,Prename</i></blockquote>**")
     try:
         input3: Message = await bot.listen(editable.chat.id, timeout=20)
         raw_text3 = input3.text
@@ -581,7 +581,7 @@ async def txt_handler(bot: Client, m: Message):
     except asyncio.TimeoutError:
         raw_text4 = 'WOTKING_TOKEN'
 
-    await editable.edit(f"**Send the Video Thumb URL or send /d")
+    await editable.edit(f"**Send the Video Thumb URL or send /d**")
     try:
         input6: Message = await bot.listen(editable.chat.id, timeout=20)
         raw_text6 = input6.text
@@ -596,7 +596,7 @@ async def txt_handler(bot: Client, m: Message):
     else:
         thumb = raw_text6
 
-    await editable.edit("__⚠️Provide the Channel ID or send /d__\n\n<blockquote><i>🔹 Make me an admin to upload.\n🔸Send /id in your channel to get the Channel ID.\n\nExample: Channel ID = -100XXXXXXXXXXX</i></blockquote>\n")
+    await editable.edit("__**⚠️Provide the Channel ID or send /d__\n\n<blockquote><i>🔹 Make me an admin to upload.\n🔸Send /id in your channel to get the Channel ID.\n\nExample: Channel ID = -100XXXXXXXXXXX</i></blockquote>\n**")
     try:
         input7: Message = await bot.listen(editable.chat.id, timeout=20)
         raw_text7 = input7.text
