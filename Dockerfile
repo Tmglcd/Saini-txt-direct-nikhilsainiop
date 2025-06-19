@@ -28,9 +28,10 @@ RUN apk add --no-cache \
     cd ../.. && \
     rm -rf Bento4-1.6.0-639 v1.6.0-639.zip
 
+RUN apt-get update && apt-get install -y ffmpeg
+
 # Install Python dependencies
 RUN pip3 install --no-cache-dir --upgrade pip \
-    && apt-get update && apt-get install -y ffmpeg \
     && pip3 install --no-cache-dir --upgrade -r sainibots.txt \
     && python3 -m pip install -U yt-dlp
 
