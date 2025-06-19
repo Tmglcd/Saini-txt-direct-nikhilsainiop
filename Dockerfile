@@ -30,6 +30,7 @@ RUN apk add --no-cache \
 
 # Install Python dependencies
 RUN pip3 install --no-cache-dir --upgrade pip \
+    && apt-get update && apt-get install -y ffmpeg \
     && pip3 install --no-cache-dir --upgrade -r sainibots.txt \
     && python3 -m pip install -U yt-dlp
 
