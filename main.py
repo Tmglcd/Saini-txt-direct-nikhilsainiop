@@ -692,7 +692,7 @@ async def txt_handler(bot: Client, m: Message):
                 url   = response.json()['url']
 
             if "edge.api.brightcove.com" in url:
-                bcov = 'bcov_auth= f"{cwtoken}"'
+                bcov = f'bcov_auth= {cwtoken}'
                 url = url.split("bcov_auth")[0]+bcov
                 
             elif "childId" in url and "parentId" in url:
@@ -864,7 +864,7 @@ async def txt_handler(bot: Client, m: Message):
                     time.sleep(1)
                 
             except Exception as e:
-                await bot.send_message(channel_id, f'⚠️**Downloading Failed**⚠️\n**Name** =>> `{str(count).zfill(3)} {name1}`\n**Url** =>> {link0}\n\n<blockquote><i><b>Failed Reason: {str(e)}</b></i></blockquote>', disable_web_page_preview=True)
+                await bot.send_message(channel_id, f'⚠️**Downloading Failed**⚠️\n**Name** =>> `{str(count).zfill(3)} {name1}`\n**Url** =>> {url}\n\n<blockquote><i><b>Failed Reason: {str(e)}</b></i></blockquote>', disable_web_page_preview=True)
                 count += 1
                 failed_count += 1
                 continue
