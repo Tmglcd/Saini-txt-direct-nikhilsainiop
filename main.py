@@ -508,7 +508,7 @@ async def txt_handler(bot: Client, m: Message):
         os.remove(x)
         return
     
-    await editable.edit(f"**Total 🔗 links found are {len(links)}\n<blockquote>•PDF : {pdf_count}   •V2 : {v2_count}\n•Img : {img_count}   •YT : {yt_count}\n•zip : {zip_count}   •m3u8 : {m3u8_count}\n•drm : {drm_count}   •Other : {other_count}\n•mpd : {mpd_count}</blockquote>\nSend From where you want to download**")
+    await editable.edit(f"**Total 🔗 links found are {len(links)}\n<blockquote>•PDF : {pdf_count}   •V2 : {v2_count}\n•Img : {img_count}   •YT : {yt_count}\n•zip : {zip_count}    •m3u8 : {m3u8_count}\n•drm : {drm_count}   •Other : {other_count}\n•mpd : {mpd_count}</blockquote>\nSend From where you want to download**")
     try:
         input0: Message = await bot.listen(editable.chat.id, timeout=20)
         raw_text = input0.text
@@ -692,7 +692,7 @@ async def txt_handler(bot: Client, m: Message):
                 url   = response.json()['url']
 
             if "edge.api.brightcove.com" in url:
-                bcov = f'bcov_auth= {cwtoken}'
+                bcov = f'bcov_auth={cwtoken}'
                 url = url.split("bcov_auth")[0]+bcov
                 
             elif "childId" in url and "parentId" in url:
