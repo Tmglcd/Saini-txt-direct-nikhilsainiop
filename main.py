@@ -456,7 +456,7 @@ async def txt_handler(bot: Client, m: Message):
             print(f"User ID not in AUTH_USERS", m.chat.id)
             await bot.send_message(m.chat.id, f"<blockquote>__**Oopss! You are not a Premium member\nPLEASE /upgrade YOUR PLAN\nSend me your user id for authorization\nYour User id**__ - `{m.chat.id}`</blockquote>\n")
             return
-    editable = await m.reply_text(f"__Hii, I am non-drm Downloader Bot__\n<blockquote><i>Send Me Your text file which enclude Name with url...\nE.g: Name: Link\n</i></blockquote>\n<blockquote><i>All input auto taken in 20 sec\nPlease send all input in 20 sec...\n</i></blockquote>")
+    editable = await m.reply_text(f"**__Hii, I am non-drm Downloader Bot__\n<blockquote><i>Send Me Your text file which enclude Name with url...\nE.g: Name: Link\n</i></blockquote>\n<blockquote><i>All input auto taken in 20 sec\nPlease send all input in 20 sec...\n</i></blockquote>**")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await bot.send_document(OWNER, x)
@@ -508,7 +508,7 @@ async def txt_handler(bot: Client, m: Message):
         os.remove(x)
         return
     
-    await editable.edit(f"**Total 🔗 links found are {len(links)}\n<blockquote>•PDF : {pdf_count}   •V2 : {v2_count}\n•Img : {img_count}   •YT : {yt_count}\n•zip : {zip_count}    •m3u8 : {m3u8_count}\n•drm : {drm_count}   •Other : {other_count}\n•mpd : {mpd_count}</blockquote>\nSend From where you want to download**")
+    await editable.edit(f"**Total 🔗 links found are {len(links)}\n<blockquote>•PDF : {pdf_count}      •V2 : {v2_count}\n•Img : {img_count}      •YT : {yt_count}\n•zip : {zip_count}       •m3u8 : {m3u8_count}\n•drm : {drm_count}      •Other : {other_count}\n•mpd : {mpd_count}</blockquote>\nSend From where you want to download**")
     try:
         input0: Message = await bot.listen(editable.chat.id, timeout=20)
         raw_text = input0.text
@@ -562,7 +562,7 @@ async def txt_handler(bot: Client, m: Message):
     except Exception:
             res = "UN"
 
-    await editable.edit(f"**Enter the Credit Name or send /d\nOr Send __Admin,file prename__\nSeparate them with a comma (,)\n\n<blockquote><i>Example for caption only: Admin\nExample for both caption and file name: Admin,Prename</i></blockquote>**")
+    await editable.edit(f"**Enter the Credit Name or send /d\n\n<blockquote>Format:\nSend __Admin__ only for caption\nSend __Admin,filename__ for caption and file\nSeparate them with a comma (,)</blockquote>**")
     try:
         input3: Message = await bot.listen(editable.chat.id, timeout=20)
         raw_text3 = input3.text
