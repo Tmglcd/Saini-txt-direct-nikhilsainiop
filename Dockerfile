@@ -1,7 +1,3 @@
-#bot made my NIKHIL SAINI...All of you known as....SAINI BOTS
-
-#Don't change here otherwise Repo crashed
-
 # Use a Python 3.9.6 Alpine base image
 FROM python:3.9.6-alpine3.14
 
@@ -36,6 +32,6 @@ RUN apk add --no-cache \
 RUN pip3 install --no-cache-dir --upgrade pip \
     && pip3 install --no-cache-dir --upgrade -r sainibots.txt \
     && python3 -m pip install -U yt-dlp
-    
+
 # Set the command to run the application
 CMD ["sh", "-c", "gunicorn app:app & python3 main.py"]
