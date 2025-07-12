@@ -328,6 +328,7 @@ async def txt_handler(bot: Client, m: Message):
     try:
         for i in range(arg-1, len(links)):  # Iterate over each link
             if cancel_requested:
+                await cancel_message.delete()
                 await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
@@ -400,8 +401,10 @@ async def cancel_handler(client: Client, m: Message):
     global processing_request, cancel_requested
     if processing_request:
         cancel_requested = True
-        await m.reply_text("**🚦 Process cancel request received. Stopping after current process...**")
+        await m.delete()
+        cancel_message = await m.reply_text("**🚦 Process cancel request received. Stopping after current process...**")
     else:
+        cancel_message = None
         await m.reply_text("**⚡ No active process to cancel.**")
 
 @bot.on_message(filters.command("start"))
@@ -767,10 +770,12 @@ async def txt_handler(bot: Client, m: Message):
     try:
         for i in range(arg-1, len(links)):
             if cancel_requested:
+                await cancel_message.delete()
                 await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
                 return
+  
             Vxy = links[i][1].replace("file/d/","uc?export=download&id=").replace("www.youtube-nocookie.com/embed", "youtu.be").replace("?modestbranding=1", "").replace("/view?usp=sharing","")
             url = "https://" + Vxy
             link0 = "https://" + Vxy
