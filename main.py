@@ -353,12 +353,12 @@ async def txt_handler(bot: Client, m: Message):
                         os.remove(f'{name}.mp3')
                         count+=1
                     except Exception as e:
-                        await m.reply_text(f"**Fail Reason »**\n<blockquote><i>{str(e)}</i></blockquote>")
+                        await m.reply_text(f'⚠️**Downloading Failed**⚠️\n**Name** =>> `{str(count).zfill(3)} {name1}`\n**Url** =>> {url}', disable_web_page_preview=True)
                         count+=1
                 else:
                     await prog.delete(True)
+                    await m.reply_text(f'⚠️**Downloading Failed**⚠️\n**Name** =>> `{str(count).zfill(3)} {name1}`\n**Url** =>> {url}\n\n**Fail Reason »**\n<blockquote><i>{str(e)}</i></blockquote>', disable_web_page_preview=True)
                     count+=1
-                    await m.reply_text(f"**Fail Reason »**\n<blockquote><i>{str(e)}</i></blockquote>")
                                
     except Exception as e:
         await m.reply_text(f"<b>Failed Reason:</b>\n<blockquote><b>{str(e)}</b></blockquote>")
