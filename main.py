@@ -1303,7 +1303,7 @@ def reset_and_set_commands():
 
 
 if __name__ == "__main__":
-    set_bot_commands()
+    reset_and_set_commands()
     notify_owner() 
 
 
