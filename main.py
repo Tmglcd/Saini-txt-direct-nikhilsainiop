@@ -306,12 +306,12 @@ async def txt_handler(bot: Client, m: Message):
             links.append(i.split("://", 1))
         os.remove(x)
     except:
-        await m.reply_text("Invalid file input.")
+        await m.reply_text("**Invalid file input.**")
         os.remove(x)
         return
 
-    await m.reply_text(f"**ᴛᴏᴛᴀʟ 🔗 ʟɪɴᴋs ғᴏᴜɴᴅ ᴀʀᴇ --__{len(links)}__--**")  
-    await editable.edit("**🔹sᴇɴᴅ ғʀᴏᴍ ᴡʜᴇʀᴇ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ**")
+  
+    await editable.edit(f"🔹**ᴛᴏᴛᴀʟ 🔗 ʟɪɴᴋs ғᴏᴜɴᴅ ᴀʀᴇ --__{len(links)}__--\n🔹sᴇɴᴅ ғʀᴏᴍ ᴡʜᴇʀᴇ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ**")
     try:
         input0: Message = await bot.listen(editable.chat.id, timeout=10)
         raw_text = input0.text
@@ -328,6 +328,7 @@ async def txt_handler(bot: Client, m: Message):
             if cancel_requested:
                 if cancel_message is not None:
                     await cancel_message.delete()
+                    cancel_message = None
                 await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
@@ -775,6 +776,7 @@ async def txt_handler(bot: Client, m: Message):
             if cancel_requested:
                 if cancel_message is not None:
                     await cancel_message.delete()
+                    cancel_message = None
                 await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
