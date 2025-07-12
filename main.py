@@ -1273,8 +1273,12 @@ def notify_owner():
     }
     requests.post(url, data=data)
 
-def set_bot_commands():
+
+def reset_and_set_commands():
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/setMyCommands"
+    # Reset
+    requests.post(url, json={"commands": []})
+    # Set new
     commands = [
         {"command": "start", "description": "✅ Check Alive the Bot"},
         {"command": "stop", "description": "🚫 Stop the ongoing process"},
@@ -1293,9 +1297,8 @@ def set_bot_commands():
         {"command": "rmauth", "description": "⏸️ Remove Authorisation "},
         {"command": "users", "description": "👨‍👨‍👧‍👦 All Premium Users"}
     ]
-    data = {"commands": str(commands).replace("'", '"')}
-    requests.post(url, data=data)
-
+    requests.post(url, json={"commands": commands})
+    
 
 
 
