@@ -325,11 +325,8 @@ async def txt_handler(bot: Client, m: Message):
     arg = int(raw_text)
     try:
         for i in range(arg-1, len(links)):  # Iterate over each link
-            if cancel_requested and cancel_message:
-                try:
-                    await cancel_message.delete()
-                except Exception:
-                    pass
+            if cancel_requested:
+                await cancel_message.delete()
                 await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
@@ -357,7 +354,7 @@ async def txt_handler(bot: Client, m: Message):
                         count+=1
                 else:
                     await prog.delete(True)
-                    await m.reply_text(f'⚠️**Downloading Failed**⚠️\n**Name** =>> `{str(count).zfill(3)} {name1}`\n**Url** =>> {url}\n\n**Fail Reason »**\n<blockquote><i>{str(e)}</i></blockquote>', disable_web_page_preview=True)
+                    await m.reply_text(f'⚠️**Downloading Failed**⚠️\n**Name** =>> `{str(count).zfill(3)} {name1}`\n**Url** =>> {url}', disable_web_page_preview=True)
                     count+=1
                                
     except Exception as e:
@@ -710,7 +707,7 @@ async def txt_handler(bot: Client, m: Message):
     else:
         CR = raw_text3
 
-    await editable.edit("**Enter __PW/CP/CW__ Working Token For 𝐌𝐏𝐃 𝐔𝐑𝐋 or send /d**")
+    await editable.edit("**Enter 𝐏𝐖/𝐂𝐖/𝐂𝐏 Working Token For 𝐌𝐏𝐃 𝐔𝐑𝐋 or send /d**")
     try:
         input4: Message = await bot.listen(editable.chat.id, timeout=20)
         raw_text4 = input4.text
@@ -777,11 +774,8 @@ async def txt_handler(bot: Client, m: Message):
     arg = int(raw_text)
     try:
         for i in range(arg-1, len(links)):
-            if cancel_requested and cancel_message:
-                try:
-                    await cancel_message.delete()
-                except Exception:
-                    pass
+            if cancel_requested:
+                await cancel_message.delete()
                 await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
