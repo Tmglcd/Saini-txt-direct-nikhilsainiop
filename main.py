@@ -1270,11 +1270,39 @@ def notify_owner():
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     data = {
         "chat_id": OWNER,
-        "text": "BOT DEPLOYED SUCCESSFULLY ✅"
+        "text": "**BOT DEPLOYED SUCCESSFULLY ✅**"
     }
     requests.post(url, data=data)
 
+def set_bot_commands():
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/setMyCommands"
+    commands = [
+        {"command": "start", "description": "✅ Check Alive the Bot"},
+        {"command": "stop", "description": "🚫 Stop the ongoing process"},
+        {"command": "help", "description": "👨‍🏭 Help about the Bot"},
+        {"command": "drm", "description": "📑 Upload .txt file"},
+        {"command": "cookies", "description": "📁 Upload YT Cookies"},
+        {"command": "y2t", "description": "🔪 YouTube → .txt Converter"},
+        {"command": "ytm", "description": "🎶 YT .txt → .mp3 downloader"},
+        {"command": "yt2m", "description": "🎵 YT link → .mp3 downloader"},
+        {"command": "t2t", "description": "📟 Text → .txt Generator"},
+        {"command": "resat", "description": "✅ Resat the Bot"},
+        {"command": "id", "description": "🆔 Get Your ID"},
+        {"command": "info", "description": "ℹ️ Check Your Information"},
+        {"command": "logs", "description": "👁️ View Bot Activity"},
+        {"command": "addauth", "description": "▶️ Add Authorisation"},
+        {"command": "rmauth", "description": "⏸️ Remove Authorisation "},
+        {"command": "users", "description": "👨‍👨‍👧‍👦 All Premium Users"}
+    ]
+    data = {"commands": str(commands).replace("'", '"')}
+    requests.post(url, data=data)
+
+
+
+
 if __name__ == "__main__":
-    notify_owner()
+    set_bot_commands()
+    notify_owner() 
+
 
 bot.run()
