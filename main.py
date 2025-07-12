@@ -410,11 +410,6 @@ async def cancel_handler(client: Client, m: Message):
     if processing_request:
         cancel_requested = True
         await m.delete()
-        if cancel_message:  # Pehle se message hai toh usko delete karo
-            try:
-                await cancel_message.delete()
-            except Exception:
-                pass
         cancel_message = await m.reply_text("**🚦 Process cancel request received. Stopping after current process...**")
     else:
         cancel_message = None
