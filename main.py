@@ -1265,7 +1265,16 @@ async def text_handler(bot: Client, m: Message):
     except Exception as e:
         await m.reply_text(str(e))
 
+#...............…........
+def notify_owner():
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    data = {
+        "chat_id": OWNER,
+        "text": "BOT DEPLOYED SUCCESSFULLY ✅"
+    }
+    requests.post(url, data=data)
 
-
+if __name__ == "__main__":
+    notify_owner()
 
 bot.run()
