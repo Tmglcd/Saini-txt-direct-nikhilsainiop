@@ -329,7 +329,7 @@ async def txt_handler(bot: Client, m: Message):
     try:
         for i in range(arg-1, len(links)):  # Iterate over each link
             if cancel_requested:
-                await m.reply_text("⛔ Process cancelled by user.")
+                await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
                 return
@@ -381,7 +381,7 @@ async def getcookies_handler(client: Client, m: Message):
     except Exception as e:
         await m.reply_text(f"⚠️ An error occurred: {str(e)}")
 
-@bot.on_message(filters.command(["stop"]) )
+@bot.on_message(filters.command(["resat"]) )
 async def restart_handler(_, m):
     if m.chat.id not in AUTH_USERS:
         print(f"User ID not in AUTH_USERS", m.chat.id)
@@ -393,17 +393,17 @@ async def restart_handler(_, m):
             f"__**Your User id** __- `{m.chat.id}`</blockquote>\n\n"
         )
     else:
-        await m.reply_text("🚦**STOPPED**🚦", True)
+        await m.reply_text("🚦**RESAT & RESTARTED**🚦", True)
         os.execl(sys.executable, sys.executable, *sys.argv)
 
-@bot.on_message(filters.command("cancel") & filters.private)
+@bot.on_message(filters.command("stop") & filters.private)
 async def cancel_handler(client: Client, m: Message):
     global processing_request, cancel_requested
     if processing_request:
         cancel_requested = True
-        await m.reply_text("🚦 Process cancel request received. Stopping current process...")
+        await m.reply_text("**🚦 Process cancel request received. Stopping after current process...**")
     else:
-        await m.reply_text("⚡ No active process to cancel.")
+        await m.reply_text("**⚡ No active process to cancel.**")
 
 @bot.on_message(filters.command("start"))
 async def start(bot, m: Message):
@@ -538,6 +538,7 @@ async def txt_handler(client: Client, m: Message):
         f"➥ /yt2m – YT link → .mp3 downloader\n"  
         f"➥ /t2t – Text → .txt Generator\n" 
         f"➥ /stop – Cancel Running Task\n"
+        f"➥ /resat – Resat Bot\n"
         f"▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰ \n" 
         f"⚙️ 𝗧𝗼𝗼𝗹𝘀 & 𝗦𝗲𝘁𝘁𝗶𝗻𝗴𝘀: \n\n" 
         f"➥ /cookies – Update YT Cookies\n" 
@@ -767,7 +768,7 @@ async def txt_handler(bot: Client, m: Message):
     try:
         for i in range(arg-1, len(links)):
             if cancel_requested:
-                await m.reply_text("⛔ Process cancelled by user.")
+                await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
                 return
