@@ -395,7 +395,15 @@ async def restart_handler(_, m):
     else:
         await m.reply_text("🚦**STOPPED**🚦", True)
         os.execl(sys.executable, sys.executable, *sys.argv)
-        
+
+@bot.on_message(filters.command("cancel") & filters.private)
+async def cancel_handler(client: Client, m: Message):
+    global processing_request, cancel_requested
+    if processing_request:
+        cancel_requested = True
+        await m.reply_text("🚦 Process cancel request received. Stopping current process...")
+    else:
+        await m.reply_text("⚡ No active process to cancel.")
 
 @bot.on_message(filters.command("start"))
 async def start(bot, m: Message):
