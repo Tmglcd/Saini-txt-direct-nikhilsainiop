@@ -318,8 +318,8 @@ async def txt_handler(bot: Client, m: Message):
         await input0.delete(True)
     except asyncio.TimeoutError:
         raw_text = '1' 
-        await editable.delete()
         
+    await editable.delete()      
     await m.reply_text(f"<blockquote><b>{file_name}</b></blockquote>")
     count = int(raw_text)
     arg = int(raw_text)
