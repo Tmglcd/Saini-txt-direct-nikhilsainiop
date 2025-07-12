@@ -325,10 +325,11 @@ async def txt_handler(bot: Client, m: Message):
     arg = int(raw_text)
     try:
         for i in range(arg-1, len(links)):  # Iterate over each link
-            if cancel_requested:
-                if cancel_message is not None:
+            if cancel_requested and cancel_message:
+                try:
                     await cancel_message.delete()
-                    cancel_message = None
+                except Exception:
+                    pass
                 await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
@@ -409,6 +410,11 @@ async def cancel_handler(client: Client, m: Message):
     if processing_request:
         cancel_requested = True
         await m.delete()
+        if cancel_message:  # Pehle se message hai toh usko delete karo
+            try:
+                await cancel_message.delete()
+            except Exception:
+                pass
         cancel_message = await m.reply_text("**🚦 Process cancel request received. Stopping after current process...**")
     else:
         cancel_message = None
@@ -776,10 +782,11 @@ async def txt_handler(bot: Client, m: Message):
     arg = int(raw_text)
     try:
         for i in range(arg-1, len(links)):
-            if cancel_requested:
-                if cancel_message is not None:
+            if cancel_requested and cancel_message:
+                try:
                     await cancel_message.delete()
-                    cancel_message = None
+                except Exception:
+                    pass
                 await m.reply_text("🚦**STOPPED**🚦")
                 processing_request = False
                 cancel_requested = False
