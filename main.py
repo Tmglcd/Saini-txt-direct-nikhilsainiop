@@ -49,6 +49,7 @@ bot = Client(
 
 processing_request = False
 cancel_requested = False
+cancel_message = None
 
 cookies_file_path = os.getenv("cookies_file_path", "youtube_cookies.txt")
 api_url = "http://master-api-v3.vercel.app/"
@@ -89,7 +90,7 @@ async def add_auth_user(client: Client, message: Message):
             await message.reply_text("**User ID is already authorized.**")
         else:
             AUTH_USERS.append(new_user_id)
-            await message.reply_text(f"**User ID `{new_user_id}` added to authorized users.*")
+            await message.reply_text(f"**User ID `{new_user_id}` added to authorized users.**")
     except (IndexError, ValueError):
         await message.reply_text("**Please provide a valid user ID.**")
 
@@ -287,7 +288,7 @@ async def yt2m_handler(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["ytm"]))
 async def txt_handler(bot: Client, m: Message):
-    global processing_request, cancel_requested
+    global processing_request, cancel_requested, cancel_message
     processing_request = True
     cancel_requested = False
     editable = await m.reply_text("🔹**Send me the TXT file containing YouTube links.**")
@@ -574,7 +575,7 @@ async def send_logs(client: Client, m: Message):  # Correct parameter name
 
 @bot.on_message(filters.command(["drm"]) )
 async def txt_handler(bot: Client, m: Message):  
-    global processing_request, cancel_requested
+    global processing_request, cancel_requested, cancel_message
     processing_request = True
     cancel_requested = False
     if m.chat.id not in AUTH_USERS:
@@ -1273,7 +1274,7 @@ def notify_owner():
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     data = {
         "chat_id": OWNER,
-        "text": "𝐁𝐨𝐭 𝐃𝐞𝐩𝐥𝐨𝐲𝐞𝐝 𝐒𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲 ✅"
+        "text": "𝐁𝐨𝐭 𝐑𝐞𝐬𝐚𝐭 𝐒𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲 ✅"
     }
     requests.post(url, data=data)
 
