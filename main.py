@@ -350,15 +350,19 @@ async def txt_handler(bot: Client, m: Message):
                     try:
                         await bot.send_document(chat_id=m.chat.id, document=f'{name}.mp3', caption=f'**🎵 Title : **  {name}.mp3\n\n🔗**Video link** : {url}\n\n🌟** Extracted By** : {CREDIT}')
                         os.remove(f'{name}.mp3')
+                        count+=1
                     except Exception as e:
-                        print(f"Error sending document: {str(e)}")
+                        await m.reply_text(f"**Fail Reason »**\n<blockquote><i>{str(e)}</i></blockquote>")
+                        count+=1
                 else:
                     await prog.delete(True)
-                    print(f"File {name}.mp3 does not exist.")                
+                    count+=1
+                    await m.reply_text(f"**Fail Reason »**\n<blockquote><i>{str(e)}</i></blockquote>")
+                               
     except Exception as e:
         await m.reply_text(f"<b>Failed Reason:</b>\n<blockquote><b>{str(e)}</b></blockquote>")
     finally:
-        await m.reply_text("🕊️Done Baby💞")
+        await m.reply_text("<blockquote><b>All YouTube Music Download Successfully</b></blockquote>")
 
 
 m_file_path= "main.py"
