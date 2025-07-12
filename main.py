@@ -279,9 +279,13 @@ async def yt2m_handler(bot: Client, m: Message):
                     await bot.send_document(chat_id=m.chat.id, document=f'{name}.mp3', caption=f'**🎵 Title : **  {name}.mp3\n\n🔗**Video link** : {url}\n\n🌟** Extracted By** : {CREDIT}')
                     os.remove(f'{name}.mp3')
                 except Exception as e:
-                    print(f"Error sending document: {str(e)}")
+                    await editable.delete()
+                    await m.reply_text(f'⚠️**Downloading Failed**⚠️\n**Name** =>> `{name}`\n**Url** =>> {url}\n\n**Failed Reason:**\n<blockquote>{str(e)}</blockquote>', disable_web_page_preview=True)
+           
             else:
-                print(f"File {name}.mp3 does not exist.")
+                await editable.delete()
+                await m.reply_text(f'⚠️**Downloading Failed**⚠️\n**Name** =>> `{name}`\n**Url** =>> {url}', disable_web_page_preview=True)
+           
     except Exception as e:
         await m.reply_text(f"**Failed Reason:**\n<blockquote>{str(e)}</blockquote>")
 
