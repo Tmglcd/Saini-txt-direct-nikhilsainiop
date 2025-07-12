@@ -319,13 +319,10 @@ async def txt_handler(bot: Client, m: Message):
     except asyncio.TimeoutError:
         raw_text = '1' 
         await editable.delete()
-        try:
-            arg = int(raw_text)
-        except:
-            arg = 1
-
-    await m.reply_text(f"**⚡Dᴏᴡɴʟᴏᴀᴅɪɴɢ Sᴛᴀʀᴛᴇᴅ...⏳**")
+        
+    await m.reply_text(f"<blockquote><b>{file_name}</b></blockquote>")
     count = int(raw_text)
+    arg = int(raw_text)
     try:
         for i in range(arg-1, len(links)):  # Iterate over each link
             if cancel_requested:
@@ -342,18 +339,22 @@ async def txt_handler(bot: Client, m: Message):
             name = f'{name1[:60]} {CREDIT}'
 
             if "youtube.com" in url or "youtu.be" in url:
+                Show = f"<i><b>Audio Downloading</b></i>\n<blockquote><b>{str(count).zfill(3)}) {name1}</b></blockquote>"
+                prog = await bot.send_message(Show)
                 cmd = f'yt-dlp -x --audio-format mp3 --cookies {cookies_file_path} "{url}" -o "{name}.mp3"'
                 print(f"Running command: {cmd}")
                 os.system(cmd)
                 if os.path.exists(f'{name}.mp3'):
-                   print(f"File {name}.mp3 exists, attempting to send...")
-                   try:
-                       await bot.send_document(chat_id=m.chat.id, document=f'{name}.mp3', caption=f'**🎵 Title : **  {name}.mp3\n\n🔗**Video link** : {url}\n\n🌟** Extracted By** : {CREDIT}')
-                       os.remove(f'{name}.mp3')
-                   except Exception as e:
-                       print(f"Error sending document: {str(e)}")
+                    await prog.delete(True)
+                    print(f"File {name}.mp3 exists, attempting to send...")
+                    try:
+                        await bot.send_document(chat_id=m.chat.id, document=f'{name}.mp3', caption=f'**🎵 Title : **  {name}.mp3\n\n🔗**Video link** : {url}\n\n🌟** Extracted By** : {CREDIT}')
+                        os.remove(f'{name}.mp3')
+                    except Exception as e:
+                        print(f"Error sending document: {str(e)}")
                 else:
-                     print(f"File {name}.mp3 does not exist.")                
+                    await prog.delete(True)
+                    print(f"File {name}.mp3 does not exist.")                
     except Exception as e:
         await m.reply_text(f"<b>Failed Reason:</b>\n<blockquote><b>{str(e)}</b></blockquote>")
     finally:
